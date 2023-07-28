@@ -19,7 +19,7 @@ class MetasploitModule < Msf::Encoder
       )
   end
 
-  def find_valid_byte(bad_bytes)
+  def find_valid_key(bad_bytes)
     key = rand(1..255)
     if bad_bytes.include? key
       return false
@@ -54,7 +54,7 @@ class MetasploitModule < Msf::Encoder
     # loop until we get valid eof byte
     @eof_byte = false
     until @eof_byte
-      @eof_byte = find_valid_byte(state.badchars.bytes)
+      @eof_byte = find_valid_key(state.badchars.bytes)
     end
 
     # replace decoder stub byte location with eof byte
@@ -67,7 +67,7 @@ class MetasploitModule < Msf::Encoder
     bad_bytes = state.badchars.bytes.push(@eof_byte)
 
     until encoded
-      next if !key = find_valid_byte(bad_bytes)
+      next if !key = find_valid_key(bad_bytes)
       next if !encoded = xor_bytes(key, block.bytes, bad_bytes)
     end
 
