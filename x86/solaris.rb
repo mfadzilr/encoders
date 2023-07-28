@@ -9,7 +9,7 @@ class MetasploitModule < Msf::Encoder
     super(
       'Name'             => 'XOR CUSTOM',
       'Description'      => 'An Custom XOR encoder.',
-      'Author'           => [ 'Solaris Red Ninja' ],
+      'Author'           => [ 'pj@gbs' ],
       'Arch'             => ARCH_X64,
       'License'          => MSF_LICENSE,
       'Decoder'          =>
